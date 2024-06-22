@@ -1,0 +1,19 @@
+{
+  "name": "intern_management_system",
+  "version": "1.0.0",
+  "description": "backend server for the managing inters monthly work reports",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrishT0/IMS-Backend.git"
+  },
+  "author": "KrishT0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrishT0/IMS-Backend/issues"
+  },
+  "homepage": "https://github.com/KrishT0/IMS-Backend#readme"
+}
