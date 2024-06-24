@@ -4,11 +4,13 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
+    trim: true,
   },
   role: {
     type: String,
     required: [true, "Role is required"],
     enum: ["intern", "mentor", "admin"],
+    default: "intern",
   },
   age: {
     type: Number,
@@ -19,7 +21,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Mobile is required"],
     unique: true,
     validate: {
-      validator: function (v: string) {
+      validator: (v: string) => {
         return /^[6-9]\d{9}$/.test(v);
       },
       message: (props: { value: string }) =>
