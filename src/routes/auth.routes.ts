@@ -3,6 +3,6 @@ import { verifyMobileAuth } from "../controllers/auth.controller";
 
 const router: Router = express.Router();
 
-router.get("/verify-mobile", verifyMobileAuth);
+router.post("/verify-mobile", verifyMobileAuth);
 
 export default router;
