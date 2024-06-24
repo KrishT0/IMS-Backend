@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Age is required"],
   },
   mobile: {
-    type: Number,
+    type: String,
     required: [true, "Mobile is required"],
     unique: true,
     validate: {
