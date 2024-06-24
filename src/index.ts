@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import connectDB from "./db";
 import morgan from "morgan";
 
-import userRouter from "./routes/user.route";
+import internRouter from "./routes/intern.routes";
+import authRouter from "./routes/auth.routes";
 
 dotenv.config();
 
@@ -15,7 +16,9 @@ connectDB().then(() => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.use("/api/user", userRouter);
+  app.use("/api/auth", authRouter);
+
+  app.use("/api/user", internRouter);
 
   app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
