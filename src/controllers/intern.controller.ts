@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserModel from "../models/user.model";
+import WorkModel from "../models/work.model";
 
 const getMentorsForInterns = async (req: Request, res: Response) => {
   try {
@@ -26,20 +27,40 @@ const selectingMentor = async (req: Request, res: Response) => {
       mentor: mentor_id,
     }).exec();
     res.json({
-      status: "Success",
+      message: "Mentor selected successfully ",
     });
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-const getMentor = async (req: Request, res: Response) => {
+const uploadingWorkDetails = async (req: Request, res: Response) => {
   try {
-    const users = await UserModel.find({ role: "mentor" });
-    res.json(users);
+    const { name, intern_id, month, project_worked, work_description } =
+      req.body;
+
+    const existingSubmission = await WorkModel.findOne({
+      intern_id: intern_id,
+      month,
+    });
+    if (existingSubmission) {
+      return res.status(409).send({
+        message: "Work details for this month have already been submitted.",
+      });
+    }
+    const intern_work = new WorkModel({
+      name,
+      intern_id,
+      month,
+      project_worked,
+      work_description,
+    });
+    intern_work.save();
+
+    res.status(201).json({ message: "Work details successfully uploaded." });
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-export { getMentorsForInterns, selectingMentor, getMentor };
+export { getMentorsForInterns, selectingMentor, uploadingWorkDetails };
