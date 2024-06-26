@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import internRouter from "./routes/intern.routes";
 import authRouter from "./routes/auth.routes";
+import mentorRouter from "./routes/mentor.routes";
 
 dotenv.config();
 
@@ -18,7 +19,8 @@ connectDB().then(() => {
 
   app.use("/api/auth", authRouter);
 
-  app.use("/api/user", internRouter);
+  app.use("/api/intern", internRouter);
+  app.use("/api/mentor", mentorRouter);
 
   app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

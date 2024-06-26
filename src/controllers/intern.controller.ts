@@ -42,7 +42,7 @@ const uploadingWorkDetails = async (req: Request, res: Response) => {
     const existingSubmission = await WorkModel.findOne({
       intern_id: intern_id,
       month,
-    });
+    }).exec();
     if (existingSubmission) {
       return res.status(409).send({
         message: "Work details for this month have already been submitted.",

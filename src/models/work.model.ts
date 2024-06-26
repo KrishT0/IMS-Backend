@@ -14,12 +14,12 @@ const WorkSchema = new mongoose.Schema({
   project_worked: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, "Project work is required"],
   },
   work_description: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, "Work description is required"],
   },
   month: {
     type: Number,
