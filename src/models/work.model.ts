@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { workType } from "../types";
 
 const WorkSchema = new mongoose.Schema({
   name: {
@@ -29,5 +30,5 @@ const WorkSchema = new mongoose.Schema({
   },
 });
 
-const Work = mongoose.model("Work", WorkSchema);
+const Work = mongoose.model<workType>("Work", WorkSchema);
 export default Work;

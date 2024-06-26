@@ -2,9 +2,15 @@ import { Request, Response } from "express";
 import UserModel from "../models/user.model";
 import FeedbackModel from "../models/feedback.model";
 
+import { feedbackType } from "../types";
+
+type getInternsRequestBodyType = {
+  mentor_id: string;
+};
+
 const getInterns = async (req: Request, res: Response) => {
   try {
-    const { mentor_id } = req.body;
+    const { mentor_id } = req.body as getInternsRequestBodyType;
     const mentor = await UserModel.findOne({ _id: mentor_id });
     if (!mentor || !mentor.intern || mentor.intern.length === 0) {
       return res.status(404).json({
@@ -28,8 +34,9 @@ const getInterns = async (req: Request, res: Response) => {
 
 const feedbackSubmission = async (req: Request, res: Response) => {
   try {
-    const { mentor_id, intern_id, feedback, ratings } = req.body;
-    const Feedback = new FeedbackModel({
+    const { mentor_id, feedback, ratings, intern_id } =
+      req.body as feedbackType;
+    const Feedback = new FeedbackModel<feedbackType>({
       mentor_id,
       intern_id,
       feedback,

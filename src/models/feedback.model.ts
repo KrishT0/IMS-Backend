@@ -1,4 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
+import { feedbackType } from "../types";
 
 const feedbackSchema = new mongoose.Schema({
   mentor_id: {
@@ -22,5 +23,5 @@ const feedbackSchema = new mongoose.Schema({
   },
 });
 
-const Feedback = mongoose.model("Feedback", feedbackSchema);
+const Feedback = mongoose.model<feedbackType>("Feedback", feedbackSchema);
 export default Feedback;
