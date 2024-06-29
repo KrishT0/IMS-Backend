@@ -7,6 +7,7 @@ import cors from "cors";
 import internRouter from "./routes/intern.routes";
 import authRouter from "./routes/auth.routes";
 import mentorRouter from "./routes/mentor.routes";
+import { checkAccessToken } from "./middlewares/auth.middleware";
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ connectDB().then(() => {
   app.use(express.urlencoded({ extended: true }));
 
   app.use("/api/auth", authRouter);
-
+  app.use(checkAccessToken);
   app.use("/api/intern", internRouter);
   app.use("/api/mentor", mentorRouter);
 
