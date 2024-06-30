@@ -21,11 +21,10 @@ const getInterns = async (req: Request, res: Response) => {
     const interns = await UserModel.find({
       _id: { $in: mentor.intern },
     })
-      .select("-_id name department")
+      .select("_id name department")
       .exec();
     res.json({
-      status: "Success",
-      data: interns,
+      interns,
     });
   } catch (error) {
     res.status(500).send(error);
