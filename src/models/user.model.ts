@@ -21,13 +21,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Mobile is required"],
     unique: true,
-    validate: {
-      validator: (v: string) => {
+    validate: [
+      (v: string) => {
         return /^[6-9]\d{9}$/.test(v);
       },
-      message: (props: { value: string }) =>
+      (props: { value: string }) =>
         `${props.value} is not a valid phone number!`,
-    },
+    ],
   },
   department: {
     type: String,
