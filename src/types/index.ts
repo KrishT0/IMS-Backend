@@ -5,6 +5,7 @@ type feedbackType = {
   intern_id: mongoose.Types.ObjectId;
   ratings: number;
   feedback: string;
+  month: number;
 };
 
 type userType = {
@@ -19,7 +20,7 @@ type userType = {
 type workType = {
   name: string;
   intern_id: mongoose.Types.ObjectId;
-  month: string;
+  month: number;
   project_worked: string;
   work_description: string;
 };

@@ -21,6 +21,12 @@ const feedbackSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Feedback is required"],
   },
+  month: {
+    type: Number,
+    required: [true, "Month is required"],
+    min: 1,
+    max: 12,
+  },
 });
 
 const Feedback = mongoose.model<feedbackType>("Feedback", feedbackSchema);
