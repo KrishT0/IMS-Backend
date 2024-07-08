@@ -33,13 +33,14 @@ const getInterns = async (req: Request, res: Response) => {
 
 const feedbackSubmission = async (req: Request, res: Response) => {
   try {
-    const { mentor_id, feedback, ratings, intern_id } =
+    const { mentor_id, feedback, ratings, intern_id, month } =
       req.body as feedbackType;
     const Feedback = new FeedbackModel<feedbackType>({
       mentor_id,
       intern_id,
       feedback,
       ratings,
+      month,
     });
     Feedback.save();
     res.json({
