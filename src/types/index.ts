@@ -12,9 +12,9 @@ type userType = {
   name: string;
   age: number;
   mobile: string;
-  department: string;
-  mentor: mongoose.Schema.Types.ObjectId;
-  intern: mongoose.Schema.Types.ObjectId[];
+  department?: string;
+  mentor?: mongoose.Schema.Types.ObjectId;
+  intern?: mongoose.Schema.Types.ObjectId[];
 };
 
 type workType = {
@@ -23,6 +23,7 @@ type workType = {
   month: number;
   project_worked: string;
   work_description: string;
+  workHours: number;
 };
 
 export { feedbackType, userType, workType };

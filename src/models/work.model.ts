@@ -28,6 +28,10 @@ const WorkSchema = new mongoose.Schema({
     min: 1,
     max: 12,
   },
+  workHours: {
+    type: Number,
+    required: [true, "Work hours is required"],
+  },
 });
 
 const Work = mongoose.model<workType>("Work", WorkSchema);

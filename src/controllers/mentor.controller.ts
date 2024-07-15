@@ -31,7 +31,7 @@ const getInterns = async (req: Request, res: Response) => {
   }
 };
 
-const feedbackSubmission = async (req: Request, res: Response) => {
+const feedbackSubmission = (req: Request, res: Response) => {
   try {
     const { mentor_id, feedback, ratings, intern_id, month } =
       req.body as feedbackType;

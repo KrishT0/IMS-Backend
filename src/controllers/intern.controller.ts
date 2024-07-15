@@ -47,15 +47,21 @@ const selectingMentor = async (req: Request, res: Response) => {
 
 const uploadingWorkDetails = async (req: Request, res: Response) => {
   try {
-    const { name, intern_id, month, project_worked, work_description } =
-      req.body as workType;
+    const {
+      name,
+      intern_id,
+      month,
+      project_worked,
+      work_description,
+      workHours,
+    } = req.body as workType;
 
     const existingSubmission = await WorkModel.findOne<workType>({
       intern_id: intern_id,
       month,
     }).exec();
     if (existingSubmission) {
-      return res.status(409).send({
+      return res.status(409).json({
         message: "Work details for this month have already been submitted.",
       });
     }
@@ -65,6 +71,7 @@ const uploadingWorkDetails = async (req: Request, res: Response) => {
       month,
       project_worked,
       work_description,
+      workHours,
     });
     intern_work.save();
 
