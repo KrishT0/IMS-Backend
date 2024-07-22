@@ -7,6 +7,7 @@ import cors from "cors";
 import internRouter from "./routes/intern.routes";
 import authRouter from "./routes/auth.routes";
 import mentorRouter from "./routes/mentor.routes";
+import adminRouter from "./routes/admin.routes";
 import { checkAccessToken } from "./middlewares/auth.middleware";
 
 dotenv.config();
@@ -24,6 +25,7 @@ connectDB().then(() => {
   app.use(checkAccessToken);
   app.use("/api/intern", internRouter);
   app.use("/api/mentor", mentorRouter);
+  app.use("/api/admin", adminRouter);
 
   app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
