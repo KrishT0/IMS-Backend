@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import UserModel from "../models/user.model";
-import { userType } from "../types/index";
 
 type createInternRequestBodyType = {
   name: string;
@@ -110,7 +109,7 @@ export const getMonthlyReport = async (req: Request, res: Response) => {
 export const promoteInternsToMentor = async (req: Request, res: Response) => {
   try {
     const { intern_id } = req.body;
-    const internExists = await UserModel.findById<userType>(intern_id);
+    const internExists = await UserModel.findById(intern_id).exec();
     if (!internExists) {
       return res.status(404).json({
         message: "Intern not found",
@@ -122,10 +121,19 @@ export const promoteInternsToMentor = async (req: Request, res: Response) => {
       {
         role: "mentor",
       }
-    );
+    ).exec();
     return res.json({
       message: "Intern role updated to mentor",
     });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const getAllInterns = async (req: Request, res: Response) => {
+  try {
+    const interns = await UserModel.find({ role: "intern" }).exec();
+    res.json(interns);
   } catch (error) {
     res.status(500).send(error);
   }
