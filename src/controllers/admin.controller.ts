@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserModel from "../models/user.model";
+import { userType } from "../types/index";
 
 type createInternRequestBodyType = {
   name: string;
@@ -101,6 +102,30 @@ export const getMonthlyReport = async (req: Request, res: Response) => {
 
     const result = await UserModel.aggregate(pipeline);
     res.json(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const promoteInternsToMentor = async (req: Request, res: Response) => {
+  try {
+    const { intern_id } = req.body;
+    const internExists = await UserModel.findById<userType>(intern_id);
+    if (!internExists) {
+      return res.status(404).json({
+        message: "Intern not found",
+      });
+    }
+
+    await UserModel.updateOne(
+      { _id: intern_id },
+      {
+        role: "mentor",
+      }
+    );
+    return res.json({
+      message: "Intern role updated to mentor",
+    });
   } catch (error) {
     res.status(500).send(error);
   }
