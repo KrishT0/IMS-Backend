@@ -31,10 +31,21 @@ const getInterns = async (req: Request, res: Response) => {
   }
 };
 
-const feedbackSubmission = (req: Request, res: Response) => {
+const feedbackSubmission = async (req: Request, res: Response) => {
   try {
     const { mentor_id, feedback, ratings, intern_id, month } =
       req.body as feedbackType;
+
+    const existingSubmission = await FeedbackModel.findOne<feedbackType>({
+      intern_id: intern_id,
+      month,
+    }).exec();
+    if (existingSubmission) {
+      return res.status(409).json({
+        message: "Feedback for this intern for this month already exists",
+      });
+    }
+
     const Feedback = new FeedbackModel<feedbackType>({
       mentor_id,
       intern_id,
