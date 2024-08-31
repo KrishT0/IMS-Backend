@@ -22,7 +22,9 @@ connectDB().then(() => {
   app.use(express.urlencoded({ extended: true }));
 
   app.use("/api/auth", authRouter);
+
   app.use(checkAccessToken);
+  
   app.use("/api/intern", internRouter);
   app.use("/api/mentor", mentorRouter);
   app.use("/api/admin", adminRouter);
